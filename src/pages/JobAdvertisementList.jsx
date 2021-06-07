@@ -34,7 +34,7 @@ export default function JobAdvertisementList() {
                                 <Table.Cell>{jobAdvertisement.numberOfOpenPositions}</Table.Cell>
                                 <Table.Cell>{jobAdvertisement.applicationDeadline}</Table.Cell>
                                 <Table.Cell>
-                                    <Button color='grey'>Wiev</Button>
+                                    <Button color='grey'>View</Button>
                                 </Table.Cell>
 
                             </Table.Row>
