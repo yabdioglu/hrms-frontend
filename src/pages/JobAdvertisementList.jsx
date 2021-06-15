@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Button, Header, Icon, Menu, Table } from 'semantic-ui-react'
 import JobAdvertisementService from '../services/jobAdvertisementService'
 
@@ -8,7 +9,7 @@ export default function JobAdvertisementList() {
 
     useEffect(() => {
         let jobAdvertisementService = new JobAdvertisementService();
-        jobAdvertisementService.getJobAdvertisements().then(result => setJobAdvertisements(result.data.data))
+        jobAdvertisementService.getAllJobAdvertisements().then(result => setJobAdvertisements(result.data.data))
     }, [])
 
     return (
@@ -34,7 +35,11 @@ export default function JobAdvertisementList() {
                                 <Table.Cell>{jobAdvertisement.numberOfOpenPositions}</Table.Cell>
                                 <Table.Cell>{jobAdvertisement.applicationDeadline}</Table.Cell>
                                 <Table.Cell>
-                                    <Button color='grey'>View</Button>
+                                    <Button as={Link} to={`/jobAdvertisement/${jobAdvertisement.jobAdvertisementId}`}
+                                        content="Show Details"
+                                        icon="right arrow"
+                                        labelPosition="right"
+                                    />
                                 </Table.Cell>
 
                             </Table.Row>
@@ -61,6 +66,6 @@ export default function JobAdvertisementList() {
                     </Table.Row>
                 </Table.Footer>
             </Table>
-        </div>
+        </div >
     )
 }
