@@ -6,7 +6,7 @@ import CityService from '../services/CityService'
 import JobTitleService from '../services/JobTitleService'
 import WorkPlaceService from '../services/WorkPlaceService'
 import WorkTimeService from '../services/WorkTimeService'
-import JobAdvertisementService from '../services/jobAdvertisementService'
+import JobAdvertisementService from '../services/JobAdvertisementService'
 import { useFormik } from "formik";
 import { useHistory } from 'react-router-dom';
 
@@ -98,8 +98,6 @@ export default function JobAdvertisementAdd() {
     const handleChangeSemantic = (value, fieldName) => {
         formik.setFieldValue(fieldName, value);
     }
-    console.log(formik.values)
-    console.log(formik.errors)
     return (
         <div>
             <Card fluid>

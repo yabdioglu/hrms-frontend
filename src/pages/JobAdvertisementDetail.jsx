@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import JobAdvertisementService from '../services/jobAdvertisementService'
+import JobAdvertisementService from '../services/JobAdvertisementService'
 import { Grid, Table } from 'semantic-ui-react'
 
 export default function JobAdvertisementDetail() {
