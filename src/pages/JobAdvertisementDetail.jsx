@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import JobAdvertisementService from '../services/jobAdvertisementService'
-import { Table, Grid } from 'semantic-ui-react'
+import { Grid, Table } from 'semantic-ui-react'
 
 export default function JobAdvertisementDetail() {
     let { id } = useParams()
@@ -15,8 +15,8 @@ export default function JobAdvertisementDetail() {
 
     return (
         <div>
-            <Grid>
-                <Grid.Row>
+            <Grid padded>
+                <Grid.Row >
                     <Grid.Column width={5}>
                         <Table celled color={'orange'} key={'orange'} definition>
                             <Table.Header>
@@ -93,21 +93,26 @@ export default function JobAdvertisementDetail() {
                             </Table.Body>
                         </Table>
                     </Grid.Column>
-                    <Grid.Column width={16} style={{ marginTop: "2em" }} >
-                        <Table celled color={'orange'} key={'orange'} definition>
-                            <Table.Header>
-                                <Table.Row>
-                                    <Table.HeaderCell />
-                                    <Table.HeaderCell>Job Advertisement</Table.HeaderCell>
-                                </Table.Row>
-                            </Table.Header>
+
+                </Grid.Row>
+            </Grid>
+            <Grid>
+                <Grid.Column>
+                    <Table celled color={'orange'} key={'orange'} definition>
+                        <Table.Header>
                             <Table.Row>
-                                <Table.Cell>Description</Table.Cell>
+                                <Table.HeaderCell />
+                                <Table.HeaderCell>Job Advertisement</Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
+                        <Table.Body>
+                            <Table.Row>
+                                <Table.Cell>Job Description</Table.Cell>
                                 <Table.Cell>{jobAdvertisement.jobDescription}</Table.Cell>
                             </Table.Row>
-                        </Table>
-                    </Grid.Column>
-                </Grid.Row>
+                        </Table.Body>
+                    </Table>
+                </Grid.Column>
             </Grid>
         </div>
     )
