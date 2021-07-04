@@ -18,8 +18,8 @@ export default function JobAdvertisementAdd() {
         cityId: Yup.string().required("Please select a city"),
         jobTitleId: Yup.string().required("Please select a position"),
         jobDescription: Yup.string().required("Please enter a job description"),
-        minSalary: Yup.number().positive().required("Please enter a minimum salary"),
-        maxSalary: Yup.number().positive().required("Please enter a maximum salary"),
+        minSalary: Yup.number().positive(),
+        maxSalary: Yup.number().positive(),
         numberOfOpenPositions: Yup.number().positive().required("Please enter a number of open positions"),
         placeId: Yup.string().required("Please select a work place"),
         timeId: Yup.string().required("Please select a work time"),
@@ -40,7 +40,6 @@ export default function JobAdvertisementAdd() {
         validationSchema: schema,
         onSubmit: (values) => {
             let jobAdvertisementService = new JobAdvertisementService()
-            console.log("hello")
             formik.values.city = { cityId: formik.values.cityId }
             formik.values.workTime = { timeId: formik.values.timeId }
             formik.values.workPlace = { placeId: formik.values.placeId }
