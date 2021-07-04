@@ -9,6 +9,10 @@ export default class JobAdvertisementService {
         return axios.get("http://localhost:8080/api/jobAdvertisements/getByJobAdvertisementId?jobAdvertisementId=" + jobAdvertisementId)
     }
 
+    getByConfirmed(){
+        return axios.get("http://localhost:8080/api/jobAdvertisements/getByConfirmed")
+    }
+
     jobAdvertisementAdd(values){
         return axios.post("http://localhost:8080/api/jobAdvertisements/addJobAdvertisements",values)
     }

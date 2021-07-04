@@ -269,7 +269,7 @@ export default function JobAdvertisementAdd() {
                                 )}
                             </FormField>
                             <Button
-                                content="Ekle"
+                                content="Add"
                                 labelPosition="right"
                                 icon="add"
                                 positive
