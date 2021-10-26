@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Header, Icon, Menu, Table } from 'semantic-ui-react'
 import JobAdvertisementService from '../services/JobAdvertisementService'
+import CandidateService from '../services/CandidateService'
+import { toast } from 'react-toastify'
 
 export default function JobAdvertisementList() {
 
@@ -11,6 +13,17 @@ export default function JobAdvertisementList() {
         let jobAdvertisementService = new JobAdvertisementService();
         jobAdvertisementService.getByConfirmed().then(result => setJobAdvertisements(result.data.data))
     }, [])
+
+    const handleAddToFavourites=(jobAdvertisementId)=>{
+        let candidateService = new CandidateService();
+        let candidateId = 2
+        const values = {
+            candidateId,
+            jobAdvertisementId
+        }
+        candidateService.addJobAdvertisementToCandidateFavorites(values).then((result) => {toast.success(result.data.message)})
+        
+    }
 
     return (
         <div>
@@ -41,12 +54,14 @@ export default function JobAdvertisementList() {
                                         labelPosition="right"
                                     />
                                 </Table.Cell>
-
+                                <Table.Cell>
+                                    <Button  onClick={()=>handleAddToFavourites(jobAdvertisement.jobAdvertisementId)} icon="heart" color="red">
+                                    </Button>
+                                </Table.Cell>
                             </Table.Row>
                         ))
                     }
                 </Table.Body>
-
                 <Table.Footer>
                     <Table.Row>
                         <Table.HeaderCell colSpan='3'>

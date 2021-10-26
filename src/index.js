@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
+import 'reactjs-popup/dist/index.css';
 
 ReactDOM.render(<BrowserRouter> <App /></BrowserRouter>,document.getElementById('root')
 );

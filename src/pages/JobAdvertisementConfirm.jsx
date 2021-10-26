@@ -6,15 +6,16 @@ import { toast } from 'react-toastify'
 
 export default function JobAdvertisementCofirm() {
 
-    let jobAdvertisementService = new JobAdvertisementService();
 
     const [jobAdvertisements, setJobAdvertisements] = useState([])
 
     useEffect(() => {
+        let jobAdvertisementService = new JobAdvertisementService();
         jobAdvertisementService.getJobAdvertisements().then(result => setJobAdvertisements(result.data.data))
     }, [jobAdvertisements])
 
     const handleConfirm = (jobAdvertisementId) => {
+        let jobAdvertisementService = new JobAdvertisementService();
         let employeeId = 3
         const values = {
             employeeId,

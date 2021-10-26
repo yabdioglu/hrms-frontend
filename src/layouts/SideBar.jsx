@@ -9,29 +9,29 @@ export default function Categories() {
                     name='candidates'
                 >
                     <Icon name='users' />
-          Candidates
-        </Menu.Item>
+                    Candidates
+                </Menu.Item>
                 <Menu.Item
                     name='employers'
                 >
                     <Icon name='building outline' />
-          Employers
-        </Menu.Item>
+                    Employers
+                </Menu.Item>
 
                 <Menu.Item
                     name='jobadvertisements'
                 >
                     <Icon name='announcement' />
-          Job Advertisements
-        </Menu.Item>
+                    Job Advertisements
+                </Menu.Item>
 
 
                 <Menu.Item
                     name='jobtitles'
                 >
                     <Icon name='briefcase' />
-          Job Title
-        </Menu.Item>
+                    Job Title
+                </Menu.Item>
             </Menu>
         </div >
     )

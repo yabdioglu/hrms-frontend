@@ -11,7 +11,7 @@ export default function JobAdvertisementDetail() {
     useEffect(() => {
         let jobAdvertisementService = new JobAdvertisementService();
         jobAdvertisementService.getByJobAdvertisementId(id).then(result => setJobAdvertisement(result.data.data))
-    }, [])
+    }, [id])
 
     return (
         <div>

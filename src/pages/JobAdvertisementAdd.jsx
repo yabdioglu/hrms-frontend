@@ -9,21 +9,22 @@ import WorkTimeService from '../services/WorkTimeService'
 import JobAdvertisementService from '../services/JobAdvertisementService'
 import { useFormik } from "formik";
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function JobAdvertisementAdd() {
 
     let history = new useHistory()
 
     const schema = Yup.object({
-        cityId: Yup.string().required("Please select a city"),
-        jobTitleId: Yup.string().required("Please select a position"),
-        jobDescription: Yup.string().required("Please enter a job description"),
+        cityId: Yup.string().required(),
+        jobTitleId: Yup.string().required(),
+        jobDescription: Yup.string().required(),
         minSalary: Yup.number().positive(),
         maxSalary: Yup.number().positive(),
-        numberOfOpenPositions: Yup.number().positive().required("Please enter a number of open positions"),
-        placeId: Yup.string().required("Please select a work place"),
-        timeId: Yup.string().required("Please select a work time"),
-        applicationDeadline: Yup.date().required("Please enter an application deadline")
+        numberOfOpenPositions: Yup.number().positive().required(),
+        placeId: Yup.string().required(),
+        timeId: Yup.string().required(),
+        applicationDeadline: Yup.date().required()
     })
     const formik = useFormik({
         initialValues: {
@@ -45,7 +46,7 @@ export default function JobAdvertisementAdd() {
             formik.values.workPlace = { placeId: formik.values.placeId }
             formik.values.jobTitle = { jobTitleId: formik.values.jobTitleId }
             formik.values.employer = { id: 1 };
-            jobAdvertisementService.jobAdvertisementAdd(values).then((result) => console.log(result.data.data))
+            jobAdvertisementService.jobAdvertisementAdd(values).then((result) => {toast.success(result.data.message)})
             alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
             history.push("/")
         },
