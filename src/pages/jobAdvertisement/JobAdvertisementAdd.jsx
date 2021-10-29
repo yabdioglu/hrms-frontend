@@ -2,11 +2,11 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import React, { useEffect, useState } from 'react'
 import * as Yup from 'yup';
 import { FormField, Button, Label, Card, Dropdown, Grid, TextArea } from 'semantic-ui-react';
-import CityService from '../services/CityService'
-import JobTitleService from '../services/JobTitleService'
-import WorkPlaceService from '../services/WorkPlaceService'
-import WorkTimeService from '../services/WorkTimeService'
-import JobAdvertisementService from '../services/JobAdvertisementService'
+import CityService from '../../services/CityService'
+import JobTitleService from '../../services/JobTitleService'
+import WorkPlaceService from '../../services/WorkPlaceService'
+import WorkTimeService from '../../services/WorkTimeService'
+import JobAdvertisementService from '../../services/JobAdvertisementService'
 import { useFormik } from "formik";
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -225,9 +225,6 @@ export default function JobAdvertisementAdd() {
                                         {formik.errors.placeId}
                                     </div>
                                 )}
-                                {/* <ErrorMessage name="workPlace" render={error =>
-                                    <Label pointing basic color="red" content={error}></Label>
-                                }></ErrorMessage> */}
                             </FormField>
                             </Grid.Column>
                             <Grid.Column width={8}>

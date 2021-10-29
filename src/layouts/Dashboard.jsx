@@ -1,33 +1,26 @@
 import React from 'react'
-import { Grid } from 'semantic-ui-react'
-import { Route } from 'react-router'
-import JobAdvertisementList from '../pages/JobAdvertisementList'
-import Categories from './Categories'
-import JobAdvertisementDetail from '../pages/JobAdvertisementDetail'
-import JobAdvertisementAdd from '../pages/JobAdvertisementAdd'
-import JobAdvertisementConfirm from '../pages/JobAdvertisementConfirm'
+import { Route, Switch } from 'react-router-dom'
+import JobAdvertisementList from '../pages/jobAdvertisement/JobAdvertisementList'
+import JobAdvertisementDetail from '../pages/jobAdvertisement/JobAdvertisementDetail'
+import JobAdvertisementAdd from '../pages/jobAdvertisement/JobAdvertisementAdd'
+import JobAdvertisementConfirm from '../pages/jobAdvertisement/JobAdvertisementConfirm'
 import { ToastContainer } from 'react-toastify'
-import CurriculumVitae from '../pages/CurriculumVitae'
+import CurriculumVitae from '../pages/CurriculumVitae';
+import UserSignupPage from '../pages/UserSignupPage';
 
 export default function Dashboard() {
     return (
         <div>
             <ToastContainer position="bottom-right" />
-            <Grid>
-                <Grid.Row>
-                    <Grid.Column width={4}>
-                        <Categories />
-                    </Grid.Column>
-                    <Grid.Column width={12}>
+                        <Switch>
                         <Route exact path="/" component={JobAdvertisementList} />
-                        <Route exact path="/jobAdvertisements" component={JobAdvertisementList} />
-                        <Route exact path="/jobAdvertisement/:id" component={JobAdvertisementDetail} />
-                        <Route exact path="/jobAdvertisementAdd" component={JobAdvertisementAdd} />
-                        <Route exact path="/jobAdvertisementConfirm" component={JobAdvertisementConfirm} />
-                        <Route exact path="/curriculumVitae" component={CurriculumVitae} />
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
+                        <Route  path="/jobAdvertisements" component={JobAdvertisementList} />
+                        <Route  path="/jobAdvertisement/:id" component={JobAdvertisementDetail} />
+                        <Route  path="/jobAdvertisementAdd" component={JobAdvertisementAdd} />
+                        <Route  path="/jobAdvertisementConfirm" component={JobAdvertisementConfirm} />
+                        <Route  path="/curriculumVitae" component={CurriculumVitae} />
+                        <Route  path="/signup" component={UserSignupPage} />
+                        </Switch>
         </div>
     )
 }

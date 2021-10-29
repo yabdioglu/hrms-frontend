@@ -1,23 +1,11 @@
-import React, { useState } from 'react'
-import { NavLink, useHistory } from 'react-router-dom'
-import { Container, Menu } from 'semantic-ui-react'
-import SignedIn from './SignedIn'
-import SignOut from './SignOut'
+import React from 'react'
+import { NavLink, Link } from 'react-router-dom'
+import { Container, Menu} from 'semantic-ui-react'
 
-export default function Navi() {
+class Navi extends React.Component {
 
-    const [isAuthhenticated, setIsAuthhenticated] = useState(false)
-    const history = useHistory()
-
-    function handleSignOut() {
-        setIsAuthhenticated(false)
-        history.push("/")
-    }
-
-    function handleSignIn() {
-        setIsAuthhenticated(true)
-
-    }
+    
+    render(){
     return (
         <div>
             <Menu fixed="top">
@@ -28,11 +16,19 @@ export default function Navi() {
                     <Menu.Item as={NavLink} to="/jobAdvertisements"
                         name='Job Advertisements'
                     />
-                    <Menu.Menu position='right'>
+                    {/* <Menu.Menu position='right'>
                         {isAuthhenticated ? <SignedIn signOut={handleSignOut} /> : <SignOut signIn={handleSignIn} />}
-                    </Menu.Menu>
+                    </Menu.Menu> */}
+                    <Menu.Item position='right'>
+                        <Link className="nav-link" to="/signup">
+                            Sign Up
+                        </Link>
+                    </Menu.Item>
                 </Container>
             </Menu>
         </div>
     )
 }
+}
+
+export default Navi;

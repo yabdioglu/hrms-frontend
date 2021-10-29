@@ -17,8 +17,10 @@ export default function CurriculumVitae() {
     useEffect(() => {
         let curriculumVitaeService = new CurriculumVitaeService()
         let id = 79
-        curriculumVitaeService.getByCurriculumVitaeId(id).then((result) => setCurriculumVitae(result.data.data))
-    }, [curriculumVitae])
+        curriculumVitaeService.getByCurriculumVitaeId(id).then((result) => setCurriculumVitae(result.data.data),
+        )
+    },
+        [curriculumVitae])
 
     return (
         <div>
@@ -52,7 +54,7 @@ export default function CurriculumVitae() {
                                 </Table.Row>
                             </Table.Header>
                             <Table.Body>
-                                <Table.Row>
+                            <Table.Row>
                                     <Table.Cell>First Name</Table.Cell>
                                     <Table.Cell>{curriculumVitae.candidate?.firstName}</Table.Cell>
                                 </Table.Row>
@@ -158,15 +160,6 @@ export default function CurriculumVitae() {
                                     <Table.Row key={language.id}>
                                         <Table.Cell>{language.language?.languageName}</Table.Cell>
                                         <Table.Cell>{language.level}
-                                            {/* <Modal
-                                            trigger={<Button floated="right" icon='edit' color="orange"></Button>}
-                                        ><Modal.Header>Languages</Modal.Header>
-                                            <Modal.Content>
-                                                <Modal.Description>
-                                                    <LanguageUpdate cvId={curriculumVitae.id} />
-                                                </Modal.Description>
-                                            </Modal.Content>
-                                        </Modal> */}
                                         </Table.Cell>
                                     </Table.Row>
                                 ))}
