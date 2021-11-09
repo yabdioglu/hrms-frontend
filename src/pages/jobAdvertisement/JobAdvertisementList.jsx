@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Header, Icon, Menu, Table } from 'semantic-ui-react'
 import JobAdvertisementService from '../../services/JobAdvertisementService'
-import CandidateService from '../../services/CandidateService';
+import { addJobAddToCandidateFavorites } from '../../api/apiCalls';
 import { toast } from 'react-toastify'
 
 export default function JobAdvertisementList() {
@@ -15,14 +15,13 @@ export default function JobAdvertisementList() {
     }, [])
 
     const handleAddToFavourites=(jobAdvertisementId)=>{
-        let candidateService = new CandidateService();
         let candidateId = 2
         console.log(jobAdvertisementId);
         const values = {
             candidateId,
             jobAdvertisementId
         }
-        candidateService.addJobAdvertisementToCandidateFavorites(values).then((result) => {toast.success(result.data.message)})
+        addJobAddToCandidateFavorites(values).then((result) => {toast.success(result.data.message)})
         
     }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Form, Segment } from 'semantic-ui-react';
-import EmployeeService from '../../services/EmployeeService';
+import { employeeSignup } from '../../api/apiCalls'
 
 class SignupForEmployee extends React.Component {
     state = {
@@ -9,18 +9,31 @@ class SignupForEmployee extends React.Component {
         confirmPassword: null,
         firstName: null,
         lastName: null,
+        pendingApiCall: false,
+        errors: {}
     };
 
     onChange = event => {
         const { name, value } = event.target;
+        const errors = {...this.state.errors}
+        errors[name] = undefined;
+        if(name === 'password' || name=== 'confirmPassword'){
+            if(name === 'password' && value !== this.state.confirmPassword){
+                errors.confirmPassword = 'Password mismatch';
+            } else if (name ==='confirmPassword' && value !== this.state.password){
+                errors.confirmPassword = 'Password mismatch';
+            } else {
+                errors.confirmPassword= undefined;
+            }
+        }
         this.setState({
-            [name]: value
+            [name]: value,
+            errors
         });
     };
 
-    onClickSignup = event => {
+    onClickSignup = async event => {
         const { email, password, confirmPassword, firstName, lastName } = this.state;
-        let employeeService = new EmployeeService();
 
         const body = {
             email,
@@ -30,58 +43,62 @@ class SignupForEmployee extends React.Component {
             lastName,
         };
 
-        employeeService.registerEmployee(body);
+        this.setState({ pendingApiCall: true});
+
+        try {
+            const response = await employeeSignup(body);
+        } catch (error) {
+            if(error.response.data.validationErrors){
+                this.setState({errors: error.response.data.validationErrors})
+            }
+        }
+
+        this.setState({ pendingApiCall: false });
     };
 
     render() {
+        const { pendingApiCall, errors } = this.state;
+        const { email, firstName, lastName, password, confirmPassword } = errors;
         return (
             <div>
                 <Segment>
                     <Form size='large'>
                         <Form.Input
-                            fluid
-                            icon='user'
-                            iconPosition='left'
-                            placeholder='First Name'
-                            name="firstName"
-                            onChange={this.onChange}
+                            fluid icon='user'
+                            iconPosition='left' placeholder='First Name'
+                            name="firstName" onChange={this.onChange}
+                            error={firstName}
                         />
                         <Form.Input
-                            fluid
-                            icon='user'
-                            iconPosition='left'
-                            placeholder='Last Name'
-                            name="lastName"
-                            onChange={this.onChange}
+                            fluid icon='user'
+                            iconPosition='left' placeholder='Last Name'
+                            name="lastName" onChange={this.onChange}
+                            error={lastName}
                         />
                         <Form.Input
-                            fluid
-                            icon='mail'
-                            iconPosition='left'
-                            placeholder='E-mail address'
-                            name="email"
-                            onChange={this.onChange}
+                            fluid icon='mail'
+                            iconPosition='left' placeholder='E-mail address'
+                            name="email" onChange={this.onChange}
+                            error= {email}
                         />
                         <Form.Input
-                            fluid
-                            icon='lock'
-                            iconPosition='left'
-                            placeholder='Password'
-                            type='password'
-                            name="password"
+                            fluid icon='lock'
+                            iconPosition='left' placeholder='Password'
+                            type='password' name="password"
                             onChange={this.onChange}
+                            error={password}
                         />
                         <Form.Input
-                            fluid
-                            icon='lock'
-                            iconPosition='left'
-                            placeholder='Password Repeat'
-                            type='password'
-                            onChange={this.onChange}
-                            name="confirmPassword"
+                            fluid  icon='lock'
+                            iconPosition='left' placeholder='Password Repeat'
+                            type='password' onChange={this.onChange}
+                            name="confirmPassword" error={confirmPassword}
                         />
 
-                        <Button primary color='teal' fluid size='large' onClick={this.onClickSignup}>
+                        <Button color="orange" fluid size='large' onClick={this.onClickSignup}
+                            disabled={pendingApiCall || confirmPassword !== undefined}
+                            loading={pendingApiCall}
+                        >
                             Sign Up
                         </Button>
                     </Form>
